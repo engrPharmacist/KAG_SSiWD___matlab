@@ -1,0 +1,19 @@
+function [pop] = Elityzm(pop, param, poprzednia_populacja)
+
+chromlength = param.L;
+%popsize = param.K
+%przystosowanie= zeros(param.maxgen, popsize);
+[funkcja_najlepszego_obecnie_osobnika]=max(pop(:,chromlength+2));
+[funkcja_najlepszego_poprzedniego_osobnika,index_najlepszego_poprzedniego_osobnika]=max(poprzednia_populacja(:,chromlength+2));
+ 
+
+if funkcja_najlepszego_poprzedniego_osobnika>funkcja_najlepszego_obecnie_osobnika
+    [funkcja_najgorszego_obecnie_osobnika,index_najgorszego_obecnie_osobnika]=min(pop(:,chromlength+2));
+    pop(index_najgorszego_obecnie_osobnika,:)=poprzednia_populacja(index_najlepszego_poprzedniego_osobnika,:);
+    fprintf('Zamieniono osobnika %d o przystosowaniu %.2d na osobnika %d z poprzedniej populacji o przystosowaniu %d \n',...
+    index_najgorszego_obecnie_osobnika, funkcja_najgorszego_obecnie_osobnika,...
+    index_najlepszego_poprzedniego_osobnika, funkcja_najlepszego_poprzedniego_osobnika);
+    disp(['Zamieniono osobnika ',num2str(pop(ktory,end-1)),'; f(x) = ',num2str(wynik)]);
+    %disp('Zamieniono osobnika %c',index_najgorszego_obecnie_osobnika);
+    %index_najgorszego_obecnie_osobnika
+end
